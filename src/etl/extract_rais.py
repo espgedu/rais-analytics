@@ -15,7 +15,7 @@ def baixar_arquivo_ftp(host, caminho_ftp, arquivo, destino_local):
 
     # Obter o tamanho do arquivo
     tamanho_total = ftp.size(arquivo)
-    print(f"⬇️ Baixando {arquivo} ({tamanho_total / (1024**2):.2f} MB)...")
+    print(f"Baixando {arquivo} ({tamanho_total / (1024**2):.2f} MB)...")
 
     with open(local_path, 'wb') as f, tqdm(
         total=tamanho_total,
@@ -48,10 +48,10 @@ def extrair_arquivo(arquivo_7z, destino, caminho_7z_exe=r"C:\Program Files\7-Zip
     processo = subprocess.run(comando, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
     if processo.returncode != 0:
-        print("❌ Erro ao extrair o arquivo:")
+        print("Erro ao extrair o arquivo:")
         print(processo.stderr)
     else:
-        print(f"📦 Arquivo extraído para: {pasta_destino}")
+        print(f"Arquivo extraído para: {pasta_destino}")
 
 #Configurações
 
