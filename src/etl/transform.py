@@ -93,3 +93,35 @@ print(f"Arquivo salvo com sucesso: {caminho_saida}")
 
 
 # %%
+
+import pandas as pd
+from pathlib import Path
+
+caminho = Path(r'C:\Users\Eduardo\Desktop\hr-analytics-sql\data\processed')
+
+arquivos_2010 = list(caminho.glob('RAIS_*_2010_tratada.csv'))
+arquivos_2024 = list(caminho.glob('RAIS_*_2024_tratada.csv'))
+
+def carregar_e_concatenar(lista_arquivos, ano):
+    """
+    Carrega múltiplos arquivos CSV em dataframes, adiciona uma coluna 'ano' e concatena todos em um único dataframe.
+
+    Parâmetros:
+        lista_arquivos (list): Lista de caminhos para os arquivos CSV a serem carregados.
+        ano (int): Ano a ser atribuído à coluna 'ano' em cada dataframe.
+    """
+    dfs = []
+    for arquivo in lista_arquivos:
+        df = pd.read_csv(arquivo, encoding='utf-8', low_memory=False)
+        df['ano'] = ano
+        dfs.append(df)
+    return pd.concat(dfs, ignore_index=True)
+
+df_2010 = carregar_e_concatenar(arquivos_2010, 2010)
+df_2024 = carregar_e_concatenar(arquivos_2024, 2024)
+
+df_2010.to_csv(caminho / "rais_2010_concatenada.csv", index=False)
+df_2024.to_csv(caminho / "rais_2024_concatenada.csv", index=False)
+
+print("Arquivos concatenados e salvos com sucesso.")
+# %%

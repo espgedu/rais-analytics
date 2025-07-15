@@ -65,4 +65,5 @@ caminho_7z_exe = r"C:\Program Files\7-Zip\7z.exe"
 caminho_baixado = baixar_arquivo_ftp(host, caminho, arquivo, destino)
 extrair_arquivo(caminho_baixado, destino,caminho_7z_exe)
 
-#%%
+
+
